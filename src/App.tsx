@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import './normalice.css'; 
-import styles from './App.module.css';
+import styles from './App.module.scss';
 
 
 type FormElement = React.FormEvent<HTMLFormElement>;
