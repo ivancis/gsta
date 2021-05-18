@@ -62,7 +62,7 @@ function App(): JSX.Element {
           />
           <button
             type='submit'
-            className={styles.button}
+            className={styles.buttonPrimary}
           >
             <Add24 aria-label="Add" />
             Add todo
@@ -73,17 +73,19 @@ function App(): JSX.Element {
             return (
               <Fragment key={index}>
                 <li className={styles.listItem}>
-                  <h4
-                    className={styles.subtitle}
-                    style={{ textDecoration: todo.complete ? 'line-through' : '' }}
-                  >
-                    {todo.text}
-                  </h4>
+                  <li className={styles.listItemContent}>
+                    <h4
+                      className={styles.subtitle}
+                      style={{ textDecoration: todo.complete ? 'line-through' : '' }}
+                    >
+                      {todo.text}
+                    </h4>
+                  </li>
                   <li className={styles.listItemAction}>
                     <button
                       type='button'
                       onClick={(): void => completeTodo(index)}
-                      className={styles.button}
+                      className={styles.buttonConfirm}
                     >
                       {todo.complete ? <MisuseOutline24 aria-label="Incomplete" /> : <CheckmarkOutline24 aria-label="Complete" />}
                       {todo.complete ? 'Incomplete' : 'Complete'}
@@ -91,7 +93,7 @@ function App(): JSX.Element {
                     <button
                       type='button'
                       onClick={(): void => deleteTodo(index)}
-                      className={styles.button}
+                      className={styles.buttonDelete}
                     >
                       <TrashCan24 aria-label="Incomplete" />
                       Delete

@@ -1,4 +1,7 @@
 .app {
+    --ui-01: #607d8b;
+    --ui-minHeight: 2.5rem;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -15,7 +18,8 @@
 .form {
     display: grid;
     grid-template-columns: 1fr auto;
-    grid-gap: 1rem;
+    grid-gap: 0.5rem;
+    padding: 0.5rem;
     width: 100%;
 }
 
@@ -24,13 +28,46 @@
 }
 
 .input {
-    border: 1px dashed blue;
-    padding: 0.5rem 1rem;
+    display: grid;
+    border: 2px solid var(--ui-01);
+    border-radius: 0.25rem;
+    padding: 0.25rem;
+    min-height: var(--ui-minHeight);
+    padding-inline-start: 1rem;
+    padding-inline-end: 2rem;
 }
 
 .button {
-    border: 1px dashed blue;
-    padding: 0.5rem 1rem;
+    --button-primary: #0f62fe;
+    --button-success: #4ac35c;
+    --button-danger: #da1e28;
+
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap: 0.5rem;
+    border: 2px solid transparent;
+    border-radius: 0.25rem;
+    align-items: center;
+    padding: 0.25rem;
+    min-height: var(--ui-minHeight);
+    padding-inline-start: 1rem;
+    padding-inline-end: 2rem;
+    background: var(--ui-01);
+
+    &Primary {
+        @extend .button;
+        background: var(--button-primary);
+    }
+
+    &Delete {
+        @extend .button;
+        background: var(--button-danger);
+    }
+
+    &Confirm {
+        @extend .button;
+        background: var(--button-success);
+    }
 }
 
 .list {
@@ -45,6 +82,7 @@
 .listItem {
     display: grid;
     grid-template-columns: 1fr auto;
+    align-items: center;
 }
 
 .listItemAction {
