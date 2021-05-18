@@ -1,4 +1,6 @@
 import React, { Fragment, useState } from 'react';
+import styles from './App.module.css';
+
 
 type FormElement = React.FormEvent<HTMLFormElement>;
 
@@ -41,7 +43,7 @@ function App(): JSX.Element {
 
   return (
     <Fragment>
-      <h1>Todo List</h1>
+      <h1 className={styles.test}>Todo List</h1>
       <form onSubmit={handleSubmit}>
         <input
           type='text'
