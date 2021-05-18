@@ -1,3 +1,56 @@
-.test {
-    color: red;
+.app {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    /* REVIEW */
+    max-width: var(--colContent, 500px);
+    max-height: 100%;
+    margin: auto;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.form {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-gap: 1rem;
+    width: 100%;
+}
+
+.title {
+    width: 100%;
+}
+
+.input {
+    border: 1px dashed blue;
+    padding: 0.5rem 1rem;
+}
+
+.button {
+    border: 1px dashed blue;
+    padding: 0.5rem 1rem;
+}
+
+.list {
+    width: 100%;
+    padding: 2rem;
+    box-sizing: border-box;
+    overflow: auto;
+    display: grid;
+    grid-gap: 0.5rem;
+}
+
+.listItem {
+    display: grid;
+    grid-template-columns: 1fr auto;
+}
+
+.listItemAction {
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap: 1rem;
+    margin-right: 0;
+    margin-left: auto;
 }

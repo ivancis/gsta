@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from 'react';
+import './normalice.css'; 
 import styles from './App.module.css';
 
 
@@ -43,35 +44,59 @@ function App(): JSX.Element {
 
   return (
     <Fragment>
-      <h1 className={styles.test}>Todo List</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type='text'
-          value={value}
-          onChange={e => setValue(e.target.value)}
-          required
-        />
-        <button type='submit'>Add Todo</button>
-      </form>
-      <section>
-        {todos.map((todo: ITodo, index: number) => {
-          return (
-            <Fragment key={index}>
-              <div
-                style={{ textDecoration: todo.complete ? 'line-through' : '' }}
-              >
-                {todo.text}
-              </div>
-              <button type='button' onClick={(): void => completeTodo(index)}>
-                {todo.complete ? 'Incomplete' : 'Complete'}
-              </button>
-              <button type='button' onClick={(): void => deleteTodo(index)}>
-                &times;
-              </button>
-            </Fragment>
-          );
-        })}
-      </section>
+      <div className={styles.app}>
+        <h1 className={styles.title}>Todo List</h1>
+        <form
+          onSubmit={handleSubmit}
+          className={styles.form}
+        >
+          <input
+            type='text'
+            value={value}
+            onChange={e => setValue(e.target.value)}
+            className={styles.input}
+            required
+          />
+          <button
+            type='submit'
+            className={styles.button}
+          >
+            Add Todo
+          </button>
+        </form>
+        <ul className={styles.list}>
+          {todos.map((todo: ITodo, index: number) => {
+            return (
+              <Fragment key={index}>
+                <li className={styles.listItem}>
+                  <h4
+                    className={styles.subtitle}
+                    style={{ textDecoration: todo.complete ? 'line-through' : '' }}
+                  >
+                    {todo.text}
+                  </h4>
+                  <li className={styles.listItemAction}>
+                    <button
+                      type='button'
+                      onClick={(): void => completeTodo(index)}
+                      className={styles.button}
+                    >
+                      {todo.complete ? 'Incomplete' : 'Complete'}
+                    </button>
+                    <button
+                      type='button'
+                      onClick={(): void => deleteTodo(index)}
+                      className={styles.button}
+                    >
+                      &times;
+                    </button>
+                  </li>
+                </li>
+              </Fragment>
+            );
+          })}
+        </ul>
+      </div>
     </Fragment>
   );
 }
