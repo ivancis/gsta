@@ -1,7 +1,10 @@
 import React, { Fragment, useState } from 'react';
-import './normalice.css'; 
+
+
+import './normalice.css';
 import styles from './App.module.scss';
 
+const { Add24, CheckmarkOutline24, MisuseOutline24, TrashCan24 } = require('@carbon/icons-react');
 
 type FormElement = React.FormEvent<HTMLFormElement>;
 
@@ -61,7 +64,8 @@ function App(): JSX.Element {
             type='submit'
             className={styles.button}
           >
-            Add Todo
+            <Add24 aria-label="Add" />
+            Add todo
           </button>
         </form>
         <ul className={styles.list}>
@@ -81,6 +85,7 @@ function App(): JSX.Element {
                       onClick={(): void => completeTodo(index)}
                       className={styles.button}
                     >
+                      {todo.complete ? <MisuseOutline24 aria-label="Incomplete" /> : <CheckmarkOutline24 aria-label="Complete" />}
                       {todo.complete ? 'Incomplete' : 'Complete'}
                     </button>
                     <button
@@ -88,7 +93,8 @@ function App(): JSX.Element {
                       onClick={(): void => deleteTodo(index)}
                       className={styles.button}
                     >
-                      &times;
+                      <TrashCan24 aria-label="Incomplete" />
+                      Delete
                     </button>
                   </li>
                 </li>
