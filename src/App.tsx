@@ -1,10 +1,15 @@
 import React, { Fragment, useState } from 'react';
 
-
+import cx from 'classnames';
 import './normalice.css';
 import styles from './App.module.scss';
 
-const { Add24, CheckmarkOutline24, MisuseOutline24, TrashCan24 } = require('@carbon/icons-react');
+const {
+  Add24,
+  TrashCan24,
+  Checkbox32,
+  CheckboxChecked32
+} = require('@carbon/icons-react');
 
 type FormElement = React.FormEvent<HTMLFormElement>;
 
@@ -48,62 +53,71 @@ function App(): JSX.Element {
   return (
     <Fragment>
       <div className={styles.app}>
-        <h1 className={styles.title}>Todo List</h1>
-        <form
-          onSubmit={handleSubmit}
-          className={styles.form}
-        >
-          <input
-            type='text'
-            value={value}
-            onChange={e => setValue(e.target.value)}
-            className={styles.input}
-            required
-          />
-          <button
-            type='submit'
-            className={styles.buttonPrimary}
+        <header>
+          <h1 className={styles.title}>Todo List</h1>
+        </header>
+        <section>
+          <form
+            onSubmit={handleSubmit}
+            className={styles.form}
           >
-            <Add24 aria-label="Add" />
-            Add todo
-          </button>
-        </form>
-        <ul className={styles.list}>
-          {todos.map((todo: ITodo, index: number) => {
-            return (
-              <Fragment key={index}>
-                <li className={styles.listItem}>
-                  <li className={styles.listItemContent}>
-                    <h4
-                      className={styles.subtitle}
-                      style={{ textDecoration: todo.complete ? 'line-through' : '' }}
-                    >
-                      {todo.text}
-                    </h4>
+            <input
+              type='text'
+              value={value}
+              onChange={e => setValue(e.target.value)}
+              className={styles.input}
+              required
+            />
+            <button
+              type='submit'
+              className={styles.buttonPrimary}
+            >
+              Add to-do
+              <Add24 aria-label="Add" />
+            </button>
+          </form>
+          <ul className={styles.list}>
+            {todos.map((todo: ITodo, index: number) => {
+              return (
+                <Fragment key={index}>
+                  <li className={styles.listItem}>
+                    <div className={styles.listItemContent}>
+                      {/* <label
+                        style={{ textDecoration: todo.complete ? 'line-through' : '' }}
+                        className={styles.checkbox}
+                      > */}
+                      <label
+                        className={todo.complete ? styles.checkboxIsChecked : styles.checkbox}
+                      >
+                          <input
+                            type='checkbox'
+                            onChange={(): void => completeTodo(index)}
+                          />
+                          <span className={styles.checkboxIcon}>
+                            {todo.complete ? <CheckboxChecked32 aria-label="Incomplete" /> : <Checkbox32 aria-label="Complete" />}
+                          </span>
+                          {todo.text}
+                      </label>
+                    </div>
+                    <div className={styles.listItemAction}>
+                      <button
+                        type='button'
+                        onClick={(): void => deleteTodo(index)}
+                        className={cx(
+                          styles.buttonDelete,
+                          styles.buttonSmall,
+                          styles.buttonOnlyIcon
+                        )}
+                      >
+                        <TrashCan24 aria-label="Delete" />
+                      </button>
+                    </div>
                   </li>
-                  <li className={styles.listItemAction}>
-                    <button
-                      type='button'
-                      onClick={(): void => completeTodo(index)}
-                      className={styles.buttonConfirm}
-                    >
-                      {todo.complete ? <MisuseOutline24 aria-label="Incomplete" /> : <CheckmarkOutline24 aria-label="Complete" />}
-                      {todo.complete ? 'Incomplete' : 'Complete'}
-                    </button>
-                    <button
-                      type='button'
-                      onClick={(): void => deleteTodo(index)}
-                      className={styles.buttonDelete}
-                    >
-                      <TrashCan24 aria-label="Incomplete" />
-                      Delete
-                    </button>
-                  </li>
-                </li>
-              </Fragment>
-            );
-          })}
-        </ul>
+                </Fragment>
+              );
+            })}
+          </ul>
+        </section>
       </div>
     </Fragment>
   );
