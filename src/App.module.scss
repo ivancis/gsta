@@ -39,7 +39,7 @@
     }
 
     @media (prefers-color-scheme: light) {
-        --ui-01: #e0e0e0;
+        --ui-01: #cfd8dc;
         --ui-background: #edf2f7;
         --ui-cardBackground: #fff;
         --ui-primary: #321ad1;
@@ -50,7 +50,7 @@
         --caption: #313f4e;
     }
 
-    @media (min-width: 800px) {
+    @media (min-width: 700px) {
         --colContent: 500px;
         --ui-minHeight: 48px;
     }
@@ -99,9 +99,17 @@ section {
     z-index: 1;
     gap: 0.5rem;
 
-    /* REVIEW */
-    .input, .button {
-        flex: 1 0 auto;
+    /* REVIEW: serving just this purpose */
+    > .input {
+        flex: 1 1 auto;
+    }
+
+    > .button {
+        flex: 1 1 auto;
+
+        @media (min-width: 700px) {
+            flex: 0 0 auto;
+        }
     }
 }
 
@@ -217,6 +225,8 @@ section {
     align-items: center;
     justify-content: center;
     padding: 0.25rem;
+    border-radius: 0.25rem;
+    background: var(--ui-cardBackground);
 }
 
 .list {
