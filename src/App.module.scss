@@ -1,29 +1,31 @@
 .app {
+    --ui-fontFamily: 'PT Sans', sans-serif;
     --ui-minHeight: 44px;
+    --duration: 0.2s;
 
     --shadow-01: 0 100px 80px rgba(0, 0, 0, 0.07);
+
     --shadow-02: 0 1.1px 5.3px rgba(0, 0, 0, 0.028),
                 0 3.6px 17.9px rgba(0, 0, 0, 0.042),
                 0 16px 80px rgba(0, 0, 0, 0.07);
+
     --shadow-03: 0 2.8px 2.2px rgba(0, 0, 0, 0.02),
                 0 6.7px 5.3px rgba(0, 0, 0, 0.028),
                 0 12.5px 10px rgba(0, 0, 0, 0.035),
                 0 22.3px 17.9px rgba(0, 0, 0, 0.042),
                 0 41.8px 33.4px rgba(0, 0, 0, 0.05),
                 0 100px 80px rgba(0, 0, 0, 0.07);
-    --duration: 0.2s;
 
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    width: 100%;
-    height: 100vh;
     margin: auto;
     padding: 1rem 1rem 2rem;
-    box-sizing: border-box;
-    font-family: 'PT Sans', sans-serif;
+    width: 100%;
+    height: 100vh;
     background: var(--ui-background);
+    font-family: var(--ui-fontFamily);
     color: var(--caption);
 
     @media (prefers-color-scheme: dark) {
@@ -58,20 +60,20 @@
 
 
 header {
-    width: 100%;
-    max-width: var(--colContent);
     padding: 1rem;
     padding-inline-start: 1rem;
     padding-inline-end: 2rem;
+    width: 100%;
+    max-width: var(--colContent);
 }
 
 section {
     display: grid;
     width: 100%;
     max-width: var(--colContent);
+    border-radius: 0.5rem;
     background: var(--ui-cardBackground);
     box-shadow: var(--shadow-03);
-    border-radius: 0.5rem;
     overflow: auto;
 }
 
@@ -79,8 +81,8 @@ section {
     width: 100%;
     font-size: 1.6rem;
     font-family: monospace;
-    text-transform: uppercase;
     font-weight: var(--ui-fontWeightBold, bold);
+    text-transform: uppercase;
 }
 
 .subtitle {
@@ -91,15 +93,14 @@ section {
 .form {
     display: flex;
     flex-wrap: wrap;
-    padding: 1rem;
-    width: 100%;
+    gap: 0.5rem; // REVIEW
     position: sticky;
     top: 0;
+    padding: 1rem;
+    width: 100%;
     background: var(--ui-cardBackground);
     z-index: 1;
-    gap: 0.5rem;
 
-    /* REVIEW: serving just this purpose */
     > .input {
         flex: 1 1 auto;
     }
@@ -115,12 +116,12 @@ section {
 
 .input {
     display: grid;
-    border: 2px solid var(--ui-01);
-    border-radius: 0.25rem;
     padding: 0.25rem;
-    min-height: var(--ui-minHeight);
     padding-inline-start: 1rem;
     padding-inline-end: 2rem;
+    min-height: var(--ui-minHeight);
+    border: 2px solid var(--ui-01);
+    border-radius: 0.25rem;
 }
 
 .button {
@@ -129,13 +130,12 @@ section {
     grid-gap: 0.5rem;
     align-items: center;
     justify-content: center;
-    border: 2px solid transparent;
-    border-radius: 0.25rem;
-    align-items: center;
     padding: 0.25rem;
-    min-height: var(--ui-minHeight);
     padding-inline-start: 1rem;
     padding-inline-end: 2rem;
+    min-height: var(--ui-minHeight);
+    border: 2px solid transparent;
+    border-radius: 0.25rem;
     background: var(--ui-01);
     color: var(--caption);
     box-shadow: var(--shadow-01);
@@ -174,11 +174,11 @@ section {
 
     &OnlyIcon {
         @extend .button;
+        place-content: center;
         padding: 0.25rem;
         padding-inline-start: 0.25rem;
         padding-inline-end: 0.25rem;
         min-width: var(--ui-minHeight);
-        place-content: center;
     }
 
     &Small {
@@ -233,7 +233,6 @@ section {
     display: flex;
     flex-direction: column;
     width: 100%;
-    box-sizing: border-box;
 }
 
 .listItem {
@@ -307,6 +306,7 @@ section {
     }
 }
 
+// Keyframes
 @keyframes pulsate-bck {
     0% {
         transform: scale(1);
