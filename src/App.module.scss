@@ -1,8 +1,14 @@
 .app {
     --ui-01: #e0e0e0;
     --ui-background: #edf2f7;
-    --caption: #313f4e;
+    --ui-primary: #0f62fe;
+    --ui-primaryContrast: #fff;
+    --ui-danger: #da1e28;
+    --ui-dangerContrast: #fff;
     --ui-minHeight: 44px;
+
+    --caption: #313f4e;
+
     --shadow-01: 0 100px 80px rgba(0, 0, 0, 0.07);
     --shadow-02: 0 1.1px 5.3px rgba(0, 0, 0, 0.028),
                 0 3.6px 17.9px rgba(0, 0, 0, 0.042),
@@ -20,10 +26,9 @@
     justify-content: center;
     flex-direction: column;
     width: 100%;
-    /* REVIEW */
-    min-height: 100vh;
+    height: 100vh;
     margin: auto;
-    padding: 1rem;
+    padding: 1rem 1rem 2rem;
     box-sizing: border-box;
     font-family: 'PT Sans', sans-serif;
     background: var(--ui-background);
@@ -40,7 +45,7 @@
 header {
     width: 100%;
     max-width: var(--colContent);
-    padding: 0.25rem;
+    padding: 1rem;
     padding-inline-start: 1rem;
     padding-inline-end: 2rem;
 }
@@ -52,20 +57,31 @@ section {
     background: #fff;
     box-shadow: var(--shadow-03);
     border-radius: 0.5rem;
-    padding: 1rem;
     overflow: auto;
 }
 
 .title {
     width: 100%;
+    font-size: 1.6rem;
+    font-family: monospace;
+    text-transform: uppercase;
+    font-weight: var(--ui-fontWeightBold, bold);
+}
+
+.subtitle {
+    width: 100%;
+    font-size: 1.2rem;
 }
 
 .form {
     display: flex;
     flex-wrap: wrap;
-    padding: 0.25rem;
+    padding: 1rem;
     width: 100%;
-    /* REVIEW */
+    position: sticky;
+    top: 0;
+    background: #fff;
+    z-index: 1;
     gap: 0.5rem;
 
     /* REVIEW */
@@ -85,12 +101,6 @@ section {
 }
 
 .button {
-    --button-primary: #0f62fe;
-    --button-primaryContrast: #fff;
-
-    --button-danger: #da1e28;
-    --button-dangerContrast: #fff;
-
     display: grid;
     grid-auto-flow: column;
     grid-gap: 0.5rem;
@@ -106,25 +116,37 @@ section {
     background: var(--ui-01);
     color: var(--caption);
     box-shadow: var(--shadow-01);
-    transition: border-color ease-in-out var(--duration), box-shadow ease-in-out var(--duration);
+    transition: border-color ease-in-out var(--duration),
+                box-shadow ease-in-out var(--duration),
+                transform ease-in-out calc(var(--duration) / 2);
 
     &:hover,
     &:active {
-        border-color: rgba(0, 0, 0, 0.25);
+        border-color: rgba(0, 0, 0, 0.1);
         box-shadow: var(--shadow-01), var(--shadow-02);
         cursor: pointer;
     }
 
+    &:active {
+        transform: translateY(1px);
+    }
+
     &Primary {
         @extend .button;
-        background: var(--button-primary);
-        color: var(--button-primaryContrast);
+        background: var(--ui-primary);
+        color: var(--ui-primaryContrast);
     }
 
     &Delete {
         @extend .button;
-        background: var(--button-danger);
-        color: var(--button-dangerContrast);
+        background: transparent;
+        color: var(--ui-danger);
+
+        &:hover,
+        &:active {
+            background: var(--ui-danger);
+            color: var(--ui-dangerContrast);
+        }
     }
 
     &OnlyIcon {
@@ -148,7 +170,6 @@ section {
     align-items: center;
     position: relative;
     width: 100%;
-    color: blue;
 
     input[type="checkbox"] {
         grid-column: 1 / -1;
@@ -168,7 +189,11 @@ section {
 
     &IsChecked {
         @extend .checkbox;
-        color: purple;
+        color: var(--ui-primary);
+
+        .checkboxIcon {
+            animation: pulsate-bck var(--duration) ease-in-out both;
+        }
     }
 }
 
@@ -191,6 +216,7 @@ section {
     display: grid;
     grid-template-columns: 1fr auto;
     align-items: center;
+    margin: 0.5rem;
     transition: box-shadow ease-in-out var(--duration);
     z-index: 0;
 
@@ -208,13 +234,28 @@ section {
         pointer-events: none;
     }
 
+    // listItem hr
+    &::after {
+        position: absolute;
+        left: 0;
+        top: calc(100% + 0.5rem);
+        width: 100%;
+        height: 1px;
+        background: var(--ui-01);
+        opacity: 0.5;
+    }
+
     &:first-child {
-        margin-top: 1rem;
+        margin-top: 0.5rem;
     }
 
     &:not(:last-child) {
         margin-bottom: 0.5rem;
-        border-bottom: 2px solid var(--ui-01);
+
+        // listItem hr
+        &::after {
+            content: "";
+        }
     }
 
     &:hover,
@@ -237,6 +278,20 @@ section {
     margin-left: auto;
 
     > * {
-        margin: 0.25rem;
+        margin: 0.5rem;
+    }
+}
+
+@keyframes pulsate-bck {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        transform: scale(1);
     }
 }

@@ -54,7 +54,8 @@ function App(): JSX.Element {
     <Fragment>
       <div className={styles.app}>
         <header>
-          <h1 className={styles.title}>Todo List</h1>
+          <h1 className={styles.title}>GSy toDo</h1>
+          <h4 className={styles.subtitle}>Add your tasks for today!</h4>
         </header>
         <section>
           <form
@@ -82,11 +83,8 @@ function App(): JSX.Element {
                 <Fragment key={index}>
                   <li className={styles.listItem}>
                     <div className={styles.listItemContent}>
-                      {/* <label
-                        style={{ textDecoration: todo.complete ? 'line-through' : '' }}
-                        className={styles.checkbox}
-                      > */}
                       <label
+                        style={{ textDecoration: todo.complete ? 'line-through' : '' }}
                         className={todo.complete ? styles.checkboxIsChecked : styles.checkbox}
                       >
                           <input
