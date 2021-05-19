@@ -251,7 +251,7 @@ section {
     grid-template-columns: 1fr auto;
     align-items: center;
     margin: 0.5rem;
-    transition: box-shadow ease-in-out var(--duration);
+    transition: outline ease-in-out var(--duration);
     animation: fade-in-bottom var(--duration) cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
     z-index: 0;
 
