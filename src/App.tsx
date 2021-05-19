@@ -67,13 +67,15 @@ function App(): JSX.Element {
               value={value}
               onChange={e => setValue(e.target.value)}
               className={styles.input}
+              placeholder="Type-in your new task"
               required
             />
             <button
               type='submit'
+              title="Add"
               className={styles.buttonPrimary}
             >
-              Add to-do
+              Add
               <Add24 aria-label="Add" />
             </button>
           </form>
@@ -89,6 +91,7 @@ function App(): JSX.Element {
                       >
                           <input
                             type='checkbox'
+                            title={todo.complete ? "Uncheck" : "Check"}
                             onChange={(): void => completeTodo(index)}
                           />
                           <span className={styles.checkboxIcon}>
@@ -101,6 +104,7 @@ function App(): JSX.Element {
                       <button
                         type='button'
                         onClick={(): void => deleteTodo(index)}
+                        title="Delete"
                         className={cx(
                           styles.buttonDelete,
                           styles.buttonSmall,

@@ -29,11 +29,11 @@
     color: var(--caption);
 
     @media (prefers-color-scheme: dark) {
-        --ui-01: #e0e0e0;
-        --ui-background: #0f0f0f;
-        --ui-cardBackground: #161616;
+        --ui-01: #30363d;
+        --ui-background: #090c10;
+        --ui-cardBackground: #0d1117;
         --ui-primary: #321ad1;
-        --ui-primaryActive: #6952ff;
+        --ui-primaryActive: #8777ee;
         --ui-primaryContrast: #fff;
         --ui-danger: #da1e28;
         --ui-dangerContrast: #fff;
@@ -99,6 +99,7 @@ section {
     padding: 1rem;
     width: 100%;
     background: var(--ui-cardBackground);
+    box-shadow: var(--shadow-01), var(--shadow-02), var(--shadow-03);
     z-index: 1;
 
     > .input {
@@ -140,6 +141,8 @@ section {
     color: var(--caption);
     box-shadow: var(--shadow-01);
     transition: border-color ease-in-out var(--duration),
+                background ease-in-out var(--duration),
+                color ease-in-out var(--duration),
                 box-shadow ease-in-out var(--duration),
                 transform ease-in-out calc(var(--duration) / 2);
 
@@ -192,7 +195,10 @@ section {
     grid-gap: 0.5rem;
     align-items: center;
     position: relative;
+    padding-inline-start: 0.5rem;
+    padding-inline-end: 2rem;
     width: 100%;
+    z-index: 0;
 
     input[type="checkbox"] {
         grid-column: 1 / -1;
@@ -203,7 +209,8 @@ section {
         width: 100%;
         height: 100%;
         opacity: 0;
-        pointer-events: none;
+        z-index: -1;
+        cursor: pointer;
     }
 
     &:hover {
@@ -212,6 +219,7 @@ section {
 
     &IsChecked {
         @extend .checkbox;
+        --checkboxIconColor: var(--ui-primaryActive);
         color: var(--ui-primaryActive);
 
         .checkboxIcon {
@@ -224,9 +232,12 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
     padding: 0.25rem;
     border-radius: 0.25rem;
     background: var(--ui-cardBackground);
+    z-index: -2;
+    color: var(--checkboxIconColor, var(--ui-01));
 }
 
 .list {
@@ -242,6 +253,7 @@ section {
     align-items: center;
     margin: 0.5rem;
     transition: box-shadow ease-in-out var(--duration);
+    animation: fade-in-bottom var(--duration) cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
     z-index: 0;
 
     // listItem background (abstracting it from parent for d&d styling purposes)
@@ -250,10 +262,13 @@ section {
         position: absolute;
         left: 0;
         top: 0;
-        width: 100%;
-        height: 100%;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        width: calc(100% - 0.5rem);
+        height: calc(100% - 0.5rem);
         border-radius: 0.25rem;
-        box-shadow: var(--itemShadow);
+        outline: var(--itemOutline);
         z-index: -1;
         pointer-events: none;
     }
@@ -282,17 +297,19 @@ section {
         }
     }
 
-    &:hover,
+    &:hover {
+        --itemOutline: 1px solid var(--ui-01);
+    }
+
+    &:active,
     &:focus-within {
-        --itemShadow: inset 0px 0px 0px 1px var(--ui-01);
+        --itemOutline: 2px solid currentColor;
     }
 }
 
 .listItemContent {
     display: flex;
     align-items: center;
-    padding-inline-start: 0.5rem;
-    padding-inline-end: 2rem;
 }
 
 .listItemAction {
@@ -318,5 +335,16 @@ section {
 
     100% {
         transform: scale(1);
+    }
+}
+
+@keyframes fade-in-bottom {
+    0% {
+        transform: translateY(0.5rem);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
     }
 }
